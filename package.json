@@ -1,0 +1,22 @@
+{
+  "name": "ggs-api",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "async": "^2.1.2",
+    "body-parser": "^1.15.2",
+    "ejs": "*",
+    "express": "4.14.0",
+    "mysql": "*",
+    "node-cron": "^1.1.2",
+    "node-gyp": "^3.5.0",
+    "promise": "^7.1.1",
+    "request": "^2.78.0",
+    "request-promise": "^4.1.1",
+    "winston": "^2.3.1",
+    "winston-daily-rotate-file": "^1.4.6"
+  }
+}

@@ -1,0 +1,43 @@
+var express = require('express');
+var conn = require('../database/sql/connectionString');
+var keysSql = require('../database/sql/keysSql');
+var logger = require('../utils/logger');
+var utils = require('util')
+var router = express.Router();
+
+router.use(function timeLog(req, res, next) {
+    logger.getLogger().info(utils.format('Time: ', Date.now()));
+    next();
+});
+
+router.get('/', function (req, res) {
+
+    conn.getConnection(function (err, connection) {
+        connection.query(keysSql.getApiKey, null, function (err, rows) {
+            connection.release();
+
+            // 에러 발생시
+            if (err) {
+                logger.getLogger().error(err);
+                throw err;
+            }
+
+            res.send(rows);
+
+            // 전송 후 update
+            conn.getConnection(function (err, connection) {
+                connection.query(keysSql.updateApiKeyCnt, [rows[0].seq], function (err, result) {
+                    connection.release();
+
+                    // 에러 발생시
+                    if (err) {
+                        logger.getLogger().error(err);
+                        throw err;
+                    }
+                });
+            });
+        });
+    });
+});
+
+module.exports = router;
