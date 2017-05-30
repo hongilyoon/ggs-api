@@ -22,7 +22,7 @@ router.get('/', function (req, res) {
                 throw err;
             }
 
-            res.send(rows);
+            res.send(rows[0]);
 
             // 전송 후 update
             conn.getConnection(function (err, connection) {

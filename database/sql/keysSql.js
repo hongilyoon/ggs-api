@@ -4,7 +4,7 @@
 exports.getApiKey = "SELECT \n" +
     "    seq, api_key\n" +
     "FROM\n" +
-    "    ggs_dev.`keys`\n" +
+    "    `keys`\n" +
     "WHERE\n" +
     "    cnt < 1000\n" +
     "ORDER BY seq\n" +
